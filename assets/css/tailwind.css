@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --test: 0% 0% 100%;
+    --white: #3f3cbb;
+}

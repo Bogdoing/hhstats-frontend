@@ -1,0 +1,22 @@
+export const languages = ([
+    '1C',
+    'ruby or Ruby on Rails',
+    'Kotlin',
+    'Swift',
+    'Dart',
+    'Flutter',
+    'Rust',
+    'C++',
+    'javascript or js or frontend or Angular or React or Vue',
+    'TypeScript or ts',
+    'php',
+    'python',
+    'golang or go developer',
+    'node.js or Javascript backend or Javascript Fullstack or JS Fullstack or JS backend or TS backend',
+    '.net OR C#',
+    'java',
+    'Angular',
+    'React',
+    'Vue',
+
+])
