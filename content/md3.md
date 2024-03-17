@@ -1,19 +1,13 @@
 ---
-title: 'md'
+title: 'md3'
 description: 'meta description of the page'
 ---
 
-# Hello Contentt
-asd
-
-asd
-asd
+up ChartBar
 <ChartBar/>
 
----
-<br/>
-
+up Chart
 <Chart />
 
-## asd
+text footer
 

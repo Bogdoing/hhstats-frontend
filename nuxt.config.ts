@@ -1,12 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+  //components: true,
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxt/content'
+    '@nuxt/content',
   ],
   content: {
     // ... options
+    navigation: {
+      fields: ['md', 'md2']
+    }
+
   },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
