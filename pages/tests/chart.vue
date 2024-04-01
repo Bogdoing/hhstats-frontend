@@ -9,7 +9,7 @@ const gitData = await useGetGitData('2024-02-04')
 <template>
     <div class="">
         
-        <ChartJsonBar color="#2dd4bf"/>
+        <!-- <ChartJsonBar color="#2dd4bf"/>
 
         <div class="flex flex-wrap">
             <div class="w-full sm:w-1/4">
@@ -29,10 +29,11 @@ const gitData = await useGetGitData('2024-02-04')
             </div>
             <div class="w-full sm:w-1/4">
                 <div class="p-1 mb-4">
-                    <!-- <ChartJsonLine lang="java" region="113"/> -->
+                    <ChartJsonLine lang="java" region="113"/>
                 </div>
             </div>
-        </div>
+        </div> -->
+
         <!-- <div class="flex flex-wrap">
             <div class="w-full sm:w-1/4">
                 <div class="p-1 mb-4">

@@ -1,11 +1,14 @@
+//useGetHHDataRegion
+
 import axios from "axios"
 import { type LangData } from '../types/LangData'
 import { newDateString } from "./useCurrData";
 
-export const useGetHHLangRegion = async (lang: string, region: string): Promise<LangData[]> => {
+export const useGetHHDataRegion = async (data: string, region: string): Promise<LangData[]> => {
     try {
+        console.log(data + ' ' + region);
         const response = await axios.get(
-            `http://localhost:5000/api/v1/hh/langRegion/${lang}/${region}`);
+            `http://localhost:5000/api/v1/hh/dataRegion/${data}/${region}`);
             
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)
@@ -17,12 +20,12 @@ export const useGetHHLangRegion = async (lang: string, region: string): Promise<
         console.error('Error fetching data:', error);
         return {
             id: 1,
-            lang: lang,
+            lang: 'lang',
             vac: 1,
             vacref: '1',
             res: '1',
             region: region,
-            data: '2024-01-10T21:00:00.000Z'
+            data: data
         }
     }
 }
