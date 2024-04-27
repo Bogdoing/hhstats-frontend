@@ -32,7 +32,7 @@ export const languages = ([
     'React',
     'Vue',
     'Kotlin',
-    // 'C++',
+    'C++',
     'Dart',
     'Swift',
     'Flutter',
