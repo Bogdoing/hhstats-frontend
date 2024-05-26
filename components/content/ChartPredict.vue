@@ -6,26 +6,39 @@ ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, 
         
 import { Line } from 'vue-chartjs';
 import { type LangData } from '../types/LangData';
+import { useTest } from '~/composables/test/useTest';
 
 const props = defineProps({
-  color: String,
-  lang: String,
-  region: String
+    color: String,
+    lang: String,
+    region: String
 })
 
-const LangVacancies = await useGetHHLangRegion(
+const predictData: LangData = {
+  id: 3,
+  lang: props.lang,
+  vac: 300,
+  vacref: "ref3",
+  res: "res3",
+  region: props.region,
+  data: '2024-06-22',
+};
+
+let LangVacancies = await useGetHHLangRegion(
   props.lang   || 'php',
   props.region || '1'
 ); 
+// LangVacancies[LangVacancies.length + 1] =
+LangVacancies.push(predictData)
 
 const chartData = ref({
   labels: LangVacancies.map(item => { return item.data; }),
   datasets: [
     {
       label: 'Lang - ' + LangVacancies[0].lang.split(" ")[0] + ' | Region - ' + LangVacancies[0].region,
-      backgroundColor: props.color || '#2dd4bf',
+      backgroundColor: lastColor(15, '#2dd4bf', '#8b00ff'),//props.color || '#2dd4bf',
       borderColor: '#115e59',
-      hoverBackgroundColor : '#115e59',
+      hoverBackgroundColor  : '#115e59',
       data: LangVacancies.map(item => { return item.vac; }), 
     },
   ],
@@ -36,6 +49,18 @@ const chartOptions = ref({
   maintainAspectRatio: false,
 })
 
+function lastColor(len: number, color1: string, color2: string) {
+  let backgroundColor: Array<string> = [];
+  for (let i = 0; i < len; i++) {
+    backgroundColor[i] = color1;
+  }
+  backgroundColor[len] = color2
+  return backgroundColor
+}
+
+function addChartPredictData() {
+  
+}
 
 </script>
 <template>
@@ -48,7 +73,6 @@ const chartOptions = ref({
         />
     </div>    
   </div>
-  
 </template>
 
 <style scoped lang="css">

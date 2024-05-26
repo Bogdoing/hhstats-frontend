@@ -1,6 +1,6 @@
 import axios from "axios"
-import { type LangData } from '../types/LangData'
-import { newDateString } from "./useCurrData";
+import { type LangData } from '../../types/LangData'
+import { newDateString } from "../useCurrData";
 
 export const useGetHHLangDate = async (lang: string, date: string): Promise<LangData[]> => {
     http://localhost:5000/api/v1/hh/langData/Kotlin/2024-01-10

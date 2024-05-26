@@ -5,12 +5,13 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/content',
+    '@pinia/nuxt',
   ],
   content: {
     // ... options
     navigation: {
       fields: ['md', 'md2']
-    }
+    }    
 
   },
   tailwindcss: {
@@ -21,5 +22,15 @@ export default defineNuxtConfig({
     // config: {},
     // injectPosition: 'first',
     // viewer: true,
+  },
+  imports: {
+    dirs: [
+      // Scan top-level modules
+      'composables',
+      // ... or scan modules nested one level deep with a specific name and file extension
+      'composables/*/index.{ts,js,mjs,mts}',
+      // ... or scan all modules within given directory
+      'composables/**'
+    ]
   }
 })

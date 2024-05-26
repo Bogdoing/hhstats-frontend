@@ -8,4 +8,5 @@ if (route.params.group === 'admins' && !route.params.id) {
 
 <template>
     <p>{{ $route.params.id }} - {{ $route.params.name }}</p>
+    <ChartJsonBar color="#2dd4bf"/>
 </template>

@@ -1,8 +1,8 @@
 //useGetHHDataRegion
 
 import axios from "axios"
-import { type LangData } from '../types/LangData'
-import { newDateString } from "./useCurrData";
+import { type LangData } from '../../types/LangData'
+import { newDateString } from "../useCurrData";
 
 export const useGetHHDataRegion = async (data: string, region: string): Promise<LangData[]> => {
     try {

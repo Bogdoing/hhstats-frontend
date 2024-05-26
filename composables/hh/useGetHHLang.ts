@@ -1,15 +1,16 @@
 import axios from "axios"
-import { type LangData } from '../types/LangData'
-import { newDateString } from "./useCurrData";
+import { type LangData } from '../../types/LangData'
+import { newDateString } from "../useCurrData";
 
-export const useGetHHDate = async (date: string): Promise<LangData[]> => {
+export const useGetHHLang = async (lang: string): Promise<LangData[]> => {
     try {
         const response = await axios.get(
-            'http://localhost:5000/api/v1/hh/data/' + date);
-        
+            'http://localhost:5000/api/v1/hh/lang/' + lang);
+            
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)
-        });  
+            // console.log(response.data.rows[0].data);
+        });    
         // console.log(response.data.rows);
         return response.data.rows;
     } catch (error) {

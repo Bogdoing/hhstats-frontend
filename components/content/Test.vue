@@ -1,7 +1,9 @@
 <script setup>
 defineProps({
-    NAME: String,
+    name: String,
+    test: String
 })
+
 </script>
 
 <template>
@@ -14,7 +16,7 @@ defineProps({
             dark:bg-btnBlueDark dark:hover:bg-btnTyBlueDark
             focus:outline-none dark:focus:ring-blue-800">
             BTN
-            {{ NAME }}
+            {{ name }} {{ test }}
     </button>
 </template>
 

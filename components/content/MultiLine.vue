@@ -3,14 +3,30 @@ import { ref } from 'vue'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { PointElement, LineElement} from 'chart.js'
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-        
+
 import { Line } from 'vue-chartjs'
 
 const props = defineProps({
-    color: Array,
-    lang: Array,
-    region: String
+  color: Array,
+  lang: Array,
+  region: String
 })
+// const store = ref(useLangStore())
+props.lang = '["php", "Vue", "React"]'
+if (props.lang == undefined) {
+  // store.getLang = await useGetAllLeng()
+  console.log(1)
+  props.lang = ["php", "Vue", "React"]
+  console.log(1)
+  // props.lang = store.getLangs
+  console.log(1)
+  // console.log(store.getLangs())
+}
+// console.log(props.lang)
+
+// const allLeng = await useGetAllLeng()
+// console.log(allLeng)
+
 const allData = await useGetHHAllData()
 
 let chart = await getDataChart()

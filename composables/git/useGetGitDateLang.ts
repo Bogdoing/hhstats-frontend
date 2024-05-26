@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { LangDataGit } from '../types/LangDataGit'
+import type { LangDataGit } from '../../types/LangDataGit'
 
 export const useGetGitDateLang = async (date: string, lang: string): Promise<LangDataGit[]> => {
     http://localhost:5000/api/v1/hh/langData/Kotlin/2024-01-10

@@ -1,13 +1,24 @@
 ---
-title: 'md3'
-description: 'meta description of the page'
+title: "md3"
+description: "meta description of the page"
 ---
 
-up ChartBar
-<ChartBar/>
+md3
 
-up Chart
-<Chart />
+::test
+::
 
-text footer
+<!-- ::multiLine{:lang='["php", "Vue", "React"]' region="113"}
+:: -->
 
+<!-- ::multiLine{region="113"}
+:: -->
+
+::chart{color='#2dd4bf' lang="Vue" region="113"}
+::
+
+::chartPredict{color='#2dd4bf' lang="Vue" region="113"}
+::
+
+<!-- ::ChartAllLang
+:: -->
