@@ -4,7 +4,11 @@ import { newDateString } from "../useCurrData";
 
 export const useGetHHAllData = async () => {
     try {
-        const response = await axios.get('http://localhost:5000/api/v1/hh/allData');
+        const store = useSettingStore()
+        const response = await axios.get(
+            store.HOSTAPI + 'hh/allData'
+            // 'http://localhost:5000/api/v1/hh/allData'
+        );
             
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)

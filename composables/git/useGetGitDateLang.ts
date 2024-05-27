@@ -4,8 +4,11 @@ import type { LangDataGit } from '../../types/LangDataGit'
 export const useGetGitDateLang = async (date: string, lang: string): Promise<LangDataGit[]> => {
     http://localhost:5000/api/v1/hh/langData/Kotlin/2024-01-10
     try {
+        const store = useSettingStore()
         const response = await axios.get(
-            `http://localhost:5000/api/v1/git/dataLang/${date}/${lang}`);
+            store.HOSTAPI + `git/dataLang/${date}/${lang}`
+            // `http://localhost:5000/api/v1/git/dataLang/${date}/${lang}`
+        );
            
         // response.data.rows.forEach((element: { data: string; }) => {
         //     element.data = newDateString(element.data)

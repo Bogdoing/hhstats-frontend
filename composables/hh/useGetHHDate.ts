@@ -4,8 +4,11 @@ import { newDateString } from "../useCurrData";
 
 export const useGetHHDate = async (date: string): Promise<LangData[]> => {
     try {
+        const store = useSettingStore()
         const response = await axios.get(
-            'http://localhost:5000/api/v1/hh/data/' + date);
+            store.HOSTAPI + `/hh/data/${date}`
+            // 'http://localhost:5000/api/v1/hh/data/' + date
+        );
         
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)

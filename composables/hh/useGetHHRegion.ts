@@ -4,8 +4,11 @@ import { newDateString } from "../useCurrData";
 
 export const useGetHHRegion = async (region: string): Promise<LangData[]> => {
     try {
+        const store = useSettingStore()
         const response = await axios.get(
-            'http://localhost:5000/api/v1/hh/region/' + region);
+            store.HOSTAPI + `hh/region/${region}`
+            // 'http://localhost:5000/api/v1/hh/region/' + region
+        );
             
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)

@@ -77,9 +77,9 @@ function addChartData(label, data, color) {
 </script>
 
 <template>
-  <div class="m-2 md:mx-16 rounded-lg shadow">
+  <div class="h-screen m-2 md:mx-16 rounded-lg shadow">
     <div class="h-screen" id="chart">
-    <!-- <div class="h-96" id="chart"> -->
+    <!-- <div class="h-fit" id="chart"> -->
         <Line :data="chartData" :options="chartOptions"/>
     </div>      
   </div>

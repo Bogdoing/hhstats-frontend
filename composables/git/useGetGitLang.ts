@@ -4,8 +4,11 @@ import { newDateString } from "../useCurrData";
 
 export const useGetGitLang = async (lang: string): Promise<LangDataGit[]> => {
     try {
+        const store = useSettingStore()
         const response = await axios.get(
-            `http://localhost:5000/api/v1/git/lang/${lang}`);
+            store.HOSTAPI + `git/lang/${lang}`
+            // `http://localhost:5000/api/v1/git/lang/${lang}`
+        );
         
         response.data.rows.forEach((element: { data: string; }) => {
             element.data = newDateString(element.data)
