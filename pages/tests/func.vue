@@ -1,20 +1,21 @@
 <script setup lang="ts">
+import { all } from 'axios';
 import type { LangData } from '~/types/LangData';
 import type { LangDataGit } from '~/types/LangDataGit';
 
 const allLeng = await useGetAllLeng()
 
-const allRegion = ['1', '26', '113']
-
-// let langInput = ref(allLeng[0] || '')
-// let regionInput = ref(allRegion[0] || '')
+// const allRegionP = ['1', '26', '113']
+let allRegion = await useGetAllRegion()
+allRegion = allRegion.map(
+    i => i = i.region
+)
 
 let input = ref({
     lang: allLeng[0] || '',
     region : allRegion[0] || ''
 })
 
-// let msg = ref(regionInput)
 
 </script>
 
@@ -39,8 +40,6 @@ let input = ref({
             </select>
         </form>
         
-        <textarea v-model="input" id="message" rows="1" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-
         <Chart :key="input.lang || input.region" :region=input.region :lang=input.lang />
 
         <ChartPredict :key="input.lang" :lang=input.lang :region=input.region />

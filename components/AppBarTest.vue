@@ -14,6 +14,10 @@ const navTests = ref([
         Title: '/tests/func',
         Description: 'Кнопки',
     },
+    {
+        Title: '/tests/mutiSelect',
+        Description: 'Кнопки',
+    },
 ])
 </script>
 
