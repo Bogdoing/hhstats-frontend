@@ -9,29 +9,26 @@ import { Line } from 'vue-chartjs'
 const props = defineProps({
   color: Array,
   lang: Array,
-  region: String
+  region: String,
+  isAll: Boolean
 })
-// const store = ref(useLangStore())
-props.lang = '["php", "Vue", "React"]'
-if (props.lang == undefined) {
-  // store.getLang = await useGetAllLeng()
-  console.log(1)
-  props.lang = ["php", "Vue", "React"]
-  console.log(1)
-  // props.lang = store.getLangs
-  console.log(1)
-  // console.log(store.getLangs())
-}
-// console.log(props.lang)
+let prop = reactive({
+  color: props.color,
+  lang: props.lang || [],
+  region: props.region,
+  isAll: props.isAll
+})
 
-// const allLeng = await useGetAllLeng()
-// console.log(allLeng)
+if (!prop.isAll) {
+  prop.lang = await useGetAllLeng()
+  console.log(prop.lang)
+}
 
 const allData = await useGetHHAllData()
 
 let chart = await getDataChart()
 
-let LangVacancies = getVacanciesByLanguage(chart, props.lang[0], props.region); 
+let LangVacancies = getVacanciesByLanguage(chart, prop.lang[0], prop.region); 
 
 
 const chartData = ref({
@@ -48,15 +45,15 @@ async function getDataChart(){
   let datas_test = {}
   for (let i = 0; i < allData.length; i++) {
     //console.log(allData[i].data)
-    let HHLangRegion = await useGetHHDataRegion(allData[i].data, props.region)
+    let HHLangRegion = await useGetHHDataRegion(allData[i].data, prop.region)
     datas_test[i] = HHLangRegion
   }
   return datas_test
 }
 
 function getData() {
-  for (let i = 0; i < props.lang.length; i++) {
-      const LangVacancies = getVacanciesByLanguage(chart, props.lang[i], '113');
+  for (let i = 0; i < prop.lang.length; i++) {
+      const LangVacancies = getVacanciesByLanguage(chart, prop.lang[i], '113');
 
       let label = 'Lang - ' + LangVacancies[0].lang.split(' ')[0] + ' | Region - ' + LangVacancies[0].region 
       let data_vac_res = LangVacancies.map(item => { return (item.vac/item.res); })
@@ -83,8 +80,8 @@ function getVacanciesByLanguage(data, language, region) {
 function addChartData(label, data, color) { 
     chartData.value.datasets.push({ 
             label: label,
-            backgroundColor: props.color || '#2dd4bf', //'#2dd4bf'
-            borderColor: props.color || '#14b8a6', //'#115e59'
+            backgroundColor: prop.color || '#2dd4bf', //'#2dd4bf'
+            borderColor: prop.color || '#14b8a6', //'#115e59'
             hoverBackgroundColor  : '#115e59',
             data: data, 
         }

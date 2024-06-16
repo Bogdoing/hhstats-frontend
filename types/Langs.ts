@@ -26,7 +26,7 @@ export const languages = ([
     'python',
     'golang or go developer',
     'node.js or Javascript backend or Javascript Fullstack or JS Fullstack or JS backend or TS backend',
-    '.net OR C#',
+    // '.net OR C#',
     'java',
     'Angular',
     'React',

@@ -10,8 +10,8 @@ import type { languages } from '~/types/Langs'
 export const useSettingStore = defineStore('settings', {
     state: () => {
         return {
-            // HOSTAPI: 'http://localhost:5000/api/v1/',
-            HOSTAPI: 'http://192.168.1.64:5000/api/v1/',
+            HOSTAPI: 'http://localhost:5000/api/v1/',
+            // HOSTAPI: 'http://192.168.1.64:5000/api/v1/',
         }
     },
     getters: {

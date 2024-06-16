@@ -9,10 +9,13 @@ export default defineNuxtConfig({
   ],
   content: {
     // ... options
-    navigation: {
-      fields: ['md', 'md2']
-    }    
-
+    // navigation: {
+    //   fields: ['md', 'md2']
+    // },
+    // markdown: {
+    //   anchorLinks: false,
+    //   mdc: true,
+    // }
   },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',

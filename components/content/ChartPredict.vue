@@ -10,7 +10,7 @@ import { type LangData } from '../types/LangData';
 const props = defineProps({
     color: String,
     lang: String,
-    region: String
+    region: String,
 })
 
 let predictData: LangData = await useGetPHHLangRegion(
@@ -28,7 +28,7 @@ const chartData = ref({
   labels: LangVacancies.map(item => { return item.data; }),
   datasets: [
     {
-      label: 'Lang - ' + LangVacancies[0].lang.split(" ")[0] + ' | Region - ' + LangVacancies[0].region,
+      label: 'Lang - ' + LangVacancies[0].lang.split(" ")[0] ,//+ ' | Region - ' + LangVacancies[0].region,
       backgroundColor: lastColor(LangVacancies.length-1, props.color || '#2dd4bf', '#8b00ff'),// '#2dd4bf', '#8b00ff' \\ #8134DF
       borderColor: '#115e59',
       hoverBackgroundColor  : '#115e59',
@@ -50,6 +50,8 @@ function lastColor(len: number, color1: string, color2: string) {
   backgroundColor[len] = color2
   return backgroundColor
 }
+
+
 
 </script>
 <template>

@@ -10,7 +10,6 @@
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">STATS</span>
                 </NuxtLink>
                 <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    <a href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
                     <NuxtLink to="/test">
                         <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700" >
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -22,7 +21,7 @@
             </div>
         </nav>
 
-        <nav class="bg-gray-50 dark:bg-gray-700">
+        <!-- <nav class="bg-gray-50 dark:bg-gray-700">
             <div class="max-w-screen-xl px-4 py-3 mx-auto">
                 <div class="flex items-center">
                     <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
@@ -38,7 +37,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
     </div>
 
 

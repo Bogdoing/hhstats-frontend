@@ -8,6 +8,9 @@ const gitData = await useGetGitData('2024-02-04')
 
 <template>
     <div class="">
+
+        <ChartAllPredict/>
+
         <ChartJsonBar color="#2dd4bf"/>
         
 

@@ -2,14 +2,6 @@
 import { ref } from 'vue'
 
 const stats = ref([
-    // {
-    //     Title: 'Need a help in Claim',
-    //     msg: 'Go to this step by step guideline process on how to certify for your weekly benefits:',
-    // },
-    {
-        Title: 'diplom',
-        msg: 'Статистика за период (01.11.2022 - 22.01.2023)',
-    },
     {
         Title: 'md2',
         msg: 'Статистика за период (22.01.2023 - 01.11.2023)',
@@ -19,11 +11,11 @@ const stats = ref([
         msg: 'Статистика за период (01.11.2023 - 22.01.2024)',
     },
     {
-        Title: '1c',
+        Title: 'md',
         msg: 'Статистика за период (01.11.2023 - 22.01.2024)',
     },
     {
-        Title: 'md3',
+        Title: '1c',
         msg: 'Статистика за период (01.11.2023 - 22.01.2024)',
     },
 ])

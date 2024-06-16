@@ -38,7 +38,7 @@ const chartOptions = ref({
 </script>
 <template>
   <div class="m-3 md:mx-16 rounded-lg shadow">
-
+   
     <!-- <h1 class="dark:text-white ">Test/chart</h1> -->
 
     <div class="h-96" id="chart">

@@ -21,6 +21,7 @@
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
     "cheerio": "^1.0.0-rc.12",
+    "flowbite": "^2.3.0",
     "jsdom": "^23.2.0",
     "pinia": "^2.1.7",
     "unirest": "^0.6.0",

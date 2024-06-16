@@ -8,9 +8,11 @@ import { ref } from 'vue'
     <div class="flex flex-col min-h-screen
         bg-white dark:bg-gray-800">
 
-        <AppBar class=""/>
+        <!-- <AppBar class=""/> -->
 
-        <div class="flex-grow mt-28" >
+        <AppBarNav/>
+
+        <div class="flex-grow mt-0" >
             <NuxtPage/>
         </div> 
 

@@ -10,6 +10,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const getGitData: LangDataGit[] = await useGetGitData('2024-02-04')
 
+// console.log(getGitData)
 
 getGitData.sort((a, b) => Number(b.count) - Number(a.count));
 const chartData = ref({
@@ -35,7 +36,6 @@ const chartOptions = ref({
 </script>
 <template>
   <div class="m-3 rounded-lg shadow">
-
     <!-- <h1 class="dark:text-white ">Test/chart</h1> -->
 
     <div class="h-96" id="chart">

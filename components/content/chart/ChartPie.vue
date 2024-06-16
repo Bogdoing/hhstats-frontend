@@ -5,12 +5,13 @@ import { PointElement, LineElement} from 'chart.js'
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
 
 import { Pie } from 'vue-chartjs'
-import { all } from 'axios';
 
 const props = defineProps({
-  region: String
+  region: String,
+  lang: Array,
+  mod: String
 })
-const allData = await useGetHHDataRegion('2024-01-10', '113')
+let allData = filterArrayByVac(await useGetHHDataRegion('2024-01-10', '113'))
 
 let summ = 0
 for (let i = 0; i < allData.length; i++){
@@ -21,19 +22,33 @@ const c = allData.map(item => {
 })
 const data = allData[0].data 
 
+let mod = '1'
+if (props.mod == '0') {
+  allData.map(item => { return item.vac/summ*100; })
+}
+else if (props.mod == '1') {
+  allData = allData.filter(item =>
+    // item.lang.includes('Vue') ||
+    item.lang === ('Vue') ||
+    item.lang === 'React'     ||
+    item.lang === 'Angular'
+  )
+  summ = allData.map(item => { return item.vac }).reduce((acc, curr) => acc + curr, 0)
+  allData.map(item => { return item.vac / summ * 100; })
+}
 
 const chartData = ref({
-  labels: //['1C'],
-          allData.map(item => { return item.lang; }),
+  labels: allData.map(item => { return item.lang.split(' ')[0]; }),
   datasets: [
     {
-      label: 'My First Dataset',
+      label: 'Lang - ' + allData[0].lang.split(' ')[0],
       data: allData.map(item => { return item.vac/summ*100; }),
       backgroundColor: allData.map(item => {
-        if (item.lang == '1C') return 'rgb(255, 205, 86)'
-        return 'rgb(255, 205, 255)'
-      }),//['rgb(255, 205, 86)'],
-      hoverOffset: 1
+        if (item.lang == '1C') return '#115e59'//'rgb(255, 205, 86)'
+        return '#2dd4bf'//'rgb(255, 205, 255)'
+      }),
+      borderColor: '#115e59',
+      hoverOffset: 20
     }
   ]
 });
@@ -41,6 +56,10 @@ const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
 })
+
+function filterArrayByVac(arr) {
+  return arr.filter(item => item.vac > 0).sort((a, b) => b.vac - a.vac)
+}
 </script>
 
 <template>
@@ -51,7 +70,8 @@ const chartOptions = ref({
     </div>      
   </div>
 
-  <div class="flex justify-center items-center">
+  <div v-if="props.mod  === '0'"
+  class="flex justify-center items-center">
     <div class="m-6 text-center">
       <p class=""> На момент {{ data }} "1С" занимает <span>≈{{ c[0].toFixed(4) }}%</span> рынка </p>
     </div>

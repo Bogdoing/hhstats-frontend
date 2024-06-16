@@ -5,12 +5,15 @@ import { PointElement, LineElement} from 'chart.js'
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
         
 import { Line } from 'vue-chartjs'
+import { all } from 'axios';
 
 const props = defineProps({
-    color: Array,
-    lang: Array,
-    region: String
+  color: Array,
+  lang: Array,
+  region: String,
+  mode: String
 })
+
 const allData = await useGetHHAllData()
 
 let chart = await getDataChart()
@@ -31,8 +34,17 @@ const chartOptions = ref({
 async function getDataChart(){
   let datas_test = {}
   for (let i = 0; i < allData.length; i++) {
-    //console.log(allData[i].data)
     let HHLangRegion = await useGetHHDataRegion(allData[i].data, props.region)
+    // HHLangRegion.forEach(element => {
+    //   if (element.lang == '1C') {
+    //     console.log(
+    //       "|Вакансии-" + element.lang + 
+    //       "| |Резюме-" +   element.res +
+    //       "| |Регион-" +    element.region + 
+    //       "| |Дата-" +      element.data + "|"
+    //     )
+    //   }
+    // });
     datas_test[i] = HHLangRegion
   }
   return datas_test
@@ -40,13 +52,31 @@ async function getDataChart(){
 
 function getData() {
   for (let i = 0; i < props.lang.length; i++) {
-      const LangVacancies = getVacanciesByLanguage(chart, props.lang[i], '113');
+    const LangVacancies = getVacanciesByLanguage(chart, props.lang[i], props.region);
 
-      let label = 'Lang - ' + LangVacancies[0].lang.split(' ')[0] + ' | Region - ' + LangVacancies[0].region 
-      let data_vac_res = LangVacancies.map(item => { return (item.vac/item.res); })
-      let data = LangVacancies.map(item => { return (item.vac); })
-      //addChartData(label, data_vac_res)
-      addChartData(label, data)
+    let label = 'Lang - ' + LangVacancies[0].lang.split(' ')[0] //+ ' | Region - ' + LangVacancies[0].region 
+
+    let data = LangVacancies.map(item => { return (item.vac); })
+    switch (props.mode) {
+      case 'Колличество вакансий':
+        data = LangVacancies.map(item => { return (item.vac); })
+        break;
+      case 'Колличество резюме':
+        data = LangVacancies.map(item => { return (item.res); })
+        break;
+      case 'Отношение вакансий к резюме':
+        data = LangVacancies.map(item => { return (item.vac/item.res); })
+        // data = LangVacancies.map(item => { return (item.res/item.vac); })
+        break;
+      default:
+        data = LangVacancies.map(item => { return (item.vac); })
+    }
+    // let data_vac_res = LangVacancies.map(item => { return (item.vac/item.res); })
+    // let data = LangVacancies.map(item => { return (item.vac); })
+
+
+    // addChartData(label, data_vac_res)
+    addChartData(label, data)
   }
 }
 getData()
@@ -81,9 +111,18 @@ function addChartData(label, data, color) {
     <div class="h-screen" id="chart">
     <!-- <div class="h-fit" id="chart"> -->
         <Line :data="chartData" :options="chartOptions"/>
-    </div>      
+    </div> 
   </div>
-  
+
+  <div class="text-xs dark:text-gray-400">
+    <p v-if="props.mode === 'Отношение вакансий к резюме'">
+      График показывает отношение колличества резюме к колличеству вакансий.
+      (Сколько человек будет претедновать на 1 вакансию)
+    </p>
+    Регион - {{ props.region }}  
+    <br/>
+    Режим - {{ props.mode || 'null' }}  
+  </div>
 </template>
 
 <style scoped lang="css">
