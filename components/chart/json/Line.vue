@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { PointElement, LineElement} from 'chart.js'
+import { datalabelsLine } from '~/utils/datalabels'
+
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
         
 import { Line } from 'vue-chartjs'
@@ -27,12 +29,17 @@ const chartData = ref({
         data: LangVacancies.map(item => { return item.vac; }), 
     },
   ],
+  
 });
 
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    datalabels: datalabelsLine,
+  }
 })
+
 
 // function getVacanciesByLanguage(data, language, region) { 
 //   const vacancies = []; 
@@ -50,8 +57,8 @@ const chartOptions = ref({
 </script>
 <template>
   <div class="m-2 rounded-md shadow border-4 border-gray-200 dark:border-gray-700 hover:shadow-lg">
-    <!-- <div class="h-96" id="chart"> -->
-    <div class="h-48" id="chart">
+    <div class="h-72" id="chart">
+    <!-- <div class="h-48" id="chart"> -->
         <Line
         :data="chartData"
         :options="chartOptions"

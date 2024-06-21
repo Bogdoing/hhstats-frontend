@@ -3,9 +3,10 @@ import { ref } from 'vue'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { PointElement, LineElement} from 'chart.js'
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-        
+import { datalabelsNull } from '#imports';
+import { getColorsByLanguages, getColorsBgByLanguages } from '#imports';
+
 import { Line } from 'vue-chartjs'
-import { all } from 'axios';
 
 const props = defineProps({
   color: Array,
@@ -28,6 +29,10 @@ const chartData = ref({
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    datalabels: datalabelsNull,
+  },
+  scales: getScales(props.mode, 'Дата')
 })
 
 
@@ -54,7 +59,7 @@ function getData() {
   for (let i = 0; i < props.lang.length; i++) {
     const LangVacancies = getVacanciesByLanguage(chart, props.lang[i], props.region);
 
-    let label = 'Lang - ' + LangVacancies[0].lang.split(' ')[0] //+ ' | Region - ' + LangVacancies[0].region 
+    let label = LangVacancies[0].lang.split(' ')[0] + ' - ' + LangVacancies[LangVacancies.length - 1].vac 
 
     let data = LangVacancies.map(item => { return (item.vac); })
     switch (props.mode) {
@@ -65,8 +70,8 @@ function getData() {
         data = LangVacancies.map(item => { return (item.res); })
         break;
       case 'Отношение вакансий к резюме':
-        data = LangVacancies.map(item => { return (item.vac/item.res); })
-        // data = LangVacancies.map(item => { return (item.res/item.vac); })
+        // data = LangVacancies.map(item => { return (item.vac/item.res)*1; })
+        data = LangVacancies.map(item => { return (item.res/item.vac); })
         break;
       default:
         data = LangVacancies.map(item => { return (item.vac); })
@@ -95,29 +100,49 @@ function getVacanciesByLanguage(data, language, region) {
 }
 
 function addChartData(label, data, color) { 
-    chartData.value.datasets.push({ 
-            label: label,
-            backgroundColor: props.color || '#2dd4bf', //'#2dd4bf'
-            borderColor: props.color || '#14b8a6', //'#115e59'
+  //   chartData.value.datasets.push({ 
+  //           label: label + '',
+  //           backgroundColor: props.color || '#2dd4bf', //'#2dd4bf'
+  //           borderColor: props.color || '#14b8a6', //'#115e59'
+  //           hoverBackgroundColor  : '#115e59',
+  //           data: data, 
+  //       }
+  // ); 
+  chartData.value.datasets.push({ 
+            label: label + '',
+            backgroundColor: props.color || getColorsBgByLanguages(label),//'#2dd4bf', //'#2dd4bf'
+            borderColor: props.color || getColorsByLanguages(label),//getRandomColor(),//'#14b8a6', //'#115e59'
             hoverBackgroundColor  : '#115e59',
             data: data, 
         }
     ); 
 }
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 </script>
 
 <template>
-  <div class="h-screen m-2 md:mx-16 rounded-lg shadow">
-    <div class="h-screen" id="chart">
-    <!-- <div class="h-fit" id="chart"> -->
+  <!-- <div class="h-screen m-2 md:mx-16 rounded-lg shadow"> -->
+  <div class="h-96 m-2 md:mx-16 rounded-lg shadow">
+    <!-- <div class="h-screen" id="chart"> -->
+    <div class="h-96" id="chart">
         <Line :data="chartData" :options="chartOptions"/>
     </div> 
   </div>
 
+
   <div class="text-xs dark:text-gray-400">
     <p v-if="props.mode === 'Отношение вакансий к резюме'">
-      График показывает отношение колличества резюме к колличеству вакансий.
-      (Сколько человек будет претедновать на 1 вакансию)
+      График показывает отношение количества резюме к количеству вакансий. 
+      (Сколько человек будет претендовать на 1 вакансию "Меньше = лучше")
     </p>
     Регион - {{ props.region }}  
     <br/>

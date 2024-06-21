@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
 import { PointElement, LineElement} from 'chart.js'
 ChartJS.register(Title, PointElement, LineElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
+import { datalabelsPie } from '#imports';
 
 import { Pie } from 'vue-chartjs'
 
@@ -38,23 +39,36 @@ else if (props.mod == '1') {
 }
 
 const chartData = ref({
-  labels: allData.map(item => { return item.lang.split(' ')[0]; }),
+  labels: allData.map(item => { return item.lang.split(' ')[0] + ' - ' + (item.vac/summ*100).toFixed(3); }),
+  // datasets: [
+  //   {
+  //     label: 'Lang - ' + allData[0].lang.split(' ')[0],
+  //     data: allData.map(item => { return item.vac/summ*100; }),
+  //     backgroundColor: allData.map(item => {
+  //       if (item.lang == '1C') return '#115e59'//'rgb(255, 205, 86)'
+  //       return '#2dd4bf'//'rgb(255, 205, 255)'
+  //     }),
+  //     borderColor: '#115e59',
+  //     hoverOffset: 20
+  //   }
+  // ]
   datasets: [
     {
       label: 'Lang - ' + allData[0].lang.split(' ')[0],
       data: allData.map(item => { return item.vac/summ*100; }),
-      backgroundColor: allData.map(item => {
-        if (item.lang == '1C') return '#115e59'//'rgb(255, 205, 86)'
-        return '#2dd4bf'//'rgb(255, 205, 255)'
-      }),
-      borderColor: '#115e59',
+      backgroundColor: allData.map(item => {return getColorsBgByLanguages(item.lang)}),
+      borderColor: allData.map(item => {return getColorsByLanguages(item.lang)}),
       hoverOffset: 20
     }
   ]
+
 });
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    datalabels: datalabelsPie
+  }
 })
 
 function filterArrayByVac(arr) {

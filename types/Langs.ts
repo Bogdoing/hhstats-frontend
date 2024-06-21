@@ -20,7 +20,7 @@ export const languages = ([
     // 'Vue',
 
 
-    // '1C',
+    '1C',
     'TypeScript or ts',
     'php',
     'python',

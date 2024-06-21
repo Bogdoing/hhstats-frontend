@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { Bar } from 'vue-chartjs'
-
+import { datalabelsBar } from '~/utils/datalabels'
 import type { LangDataGit } from '~/types/LangDataGit';
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
@@ -31,6 +31,29 @@ const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
   indexAxis: 'y',
+  scales: {
+      y: {
+        title: {
+          display: true,
+          text: 'Названия языка программирования',
+          font: {
+            size: 15
+          }
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Количество открытых репозиториев',
+          font: {
+            size: 15
+          }
+        }
+      }
+  },
+  plugins: {
+    datalabels: datalabelsBar
+  }
 })
 
 </script>

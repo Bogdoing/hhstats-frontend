@@ -20,6 +20,7 @@
     "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "cheerio": "^1.0.0-rc.12",
     "flowbite": "^2.3.0",
     "jsdom": "^23.2.0",

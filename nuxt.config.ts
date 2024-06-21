@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@pinia/nuxt',
   ],
+  plugins: [],
   content: {
     // ... options
     // navigation: {
